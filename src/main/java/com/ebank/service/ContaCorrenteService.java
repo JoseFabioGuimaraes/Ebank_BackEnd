@@ -19,13 +19,13 @@ public class ContaCorrenteService {
         return contaCorrenteRepository.findAll();
     }
 
-    public Optional<ContaCorrente> ListarContaCorrentePorId() {
+    public Optional<ContaCorrente> listarContaCorrentePorId(Long id) {
         return contaCorrenteRepository.findById(id);
     }
 
     public ContaCorrente criarConta(ContaCorrente contaCorrente) {
         contaCorrente.setDataCriacao(LocalDateTime.now());
-        return ContaCorrenteRepository.save(contaCorrente);
+        return contaCorrenteRepository.save(contaCorrente);
     }
 
     public ContaCorrente atualizarConta(Long id, ContaCorrente contaCorrenteAtualizada) {
