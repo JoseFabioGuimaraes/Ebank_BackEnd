@@ -28,19 +28,19 @@ public class ContaCorrenteController {
     }
 
     @PostMapping
-    public ContaCorrente criarConta(@RequestBody ContaCorrente contaCorrente) {
-        return contaCorrenteService.criarConta(contaCorrente);
+    public ContaCorrente criarContaCorrente(@RequestBody ContaCorrente contaCorrente) {
+        return contaCorrenteService.criarContaCorrente(contaCorrente);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ContaCorrente> atualizarConta(@PathVariable Long id, @RequestBody ContaCorrente contaCorrenteAtualizada) {
-        ContaCorrente contaAtualizada = contaCorrenteService.atualizarConta(id, contaCorrenteAtualizada);
+    public ResponseEntity<ContaCorrente> atualizarContaCorrente(@PathVariable Long id, @RequestBody ContaCorrente contaCorrenteAtualizada) {
+        ContaCorrente contaAtualizada = contaCorrenteService.atualizarContaCorrente(id, contaCorrenteAtualizada);
         return contaAtualizada != null ? ResponseEntity.ok(contaAtualizada) : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> encerrarConta(@PathVariable Long id) {
-        contaCorrenteService.encerrarConta(id);
+    public ResponseEntity<Void> encerrarContaCorrente(@PathVariable Long id) {
+        contaCorrenteService.encerrarContaCorrente(id);
         return ResponseEntity.noContent().build();
     }
 }

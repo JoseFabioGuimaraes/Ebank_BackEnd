@@ -23,12 +23,12 @@ public class ContaCorrenteService {
         return contaCorrenteRepository.findById(id);
     }
 
-    public ContaCorrente criarConta(ContaCorrente contaCorrente) {
+    public ContaCorrente criarContaCorrente(ContaCorrente contaCorrente) {
         contaCorrente.setDataCriacao(LocalDateTime.now());
         return contaCorrenteRepository.save(contaCorrente);
     }
 
-    public ContaCorrente atualizarConta(Long id, ContaCorrente contaCorrenteAtualizada) {
+    public ContaCorrente atualizarContaCorrente(Long id, ContaCorrente contaCorrenteAtualizada) {
         Optional<ContaCorrente> contaExistente = contaCorrenteRepository.findById(id);
         if (contaExistente.isPresent()) {
             ContaCorrente conta = contaExistente.get();
@@ -41,7 +41,7 @@ public class ContaCorrenteService {
         return null;
     }
 
-    public void encerrarConta(Long id) {
+    public void encerrarContaCorrente(Long id) {
         contaCorrenteRepository.deleteById(id);
     }
 }
