@@ -1,5 +1,7 @@
 package br.com.Ebank.api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,6 +14,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Cliente{
 
     @Id
@@ -36,7 +39,15 @@ public class Cliente{
     @Enumerated(EnumType.STRING)
     private StatusCliente status = StatusCliente.ATIVO;
 
-    //@OneToMany(mappedBy = "cliente")
-   // private List<ContaCorrente> contasCorrentes;
+    @OneToOne(mappedBy = "cliente",cascade = CascadeType.ALL)
+    private ContaCorrente contaCorrente;
+
+    @OneToMany(mappedBy = "clienteRemetente")
+    @JsonIgnore
+    private List<Transacao> transacoesRemetente;
+
+    @OneToMany(mappedBy = "clienteDestinatario")
+    @JsonIgnore
+    private List<Transacao> transacoesDestinatario;
 
 }

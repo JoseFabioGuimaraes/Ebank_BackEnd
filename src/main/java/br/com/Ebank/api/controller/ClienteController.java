@@ -1,21 +1,30 @@
 package br.com.Ebank.api.controller;
 
 import br.com.Ebank.api.dto.ClienteDTO;
+import br.com.Ebank.api.dto.ContaCorrenteDTO;
+import br.com.Ebank.api.dto.TransferenciasDTO;
 import br.com.Ebank.api.model.Cliente;
+import br.com.Ebank.api.model.Transacao;
 import br.com.Ebank.api.service.ClienteService;
+import br.com.Ebank.api.service.ContaCorrenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/cliente")
 public class ClienteController {
 
+
     @Autowired
     ClienteService clienteService;
+
+    @Autowired
+    private ContaCorrenteService contaCorrenteService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -47,6 +56,27 @@ public class ClienteController {
     public ResponseEntity<Cliente> delete(@PathVariable Long id) {
         Cliente clienteUpdated = clienteService.delete(id);
         return ResponseEntity.status(200).body(clienteUpdated);
+    }
+
+    @GetMapping("{id}/saldo")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<BigDecimal> getSaldo(@PathVariable Long id) {
+        BigDecimal saldo = contaCorrenteService.getsaldo(id);
+        return ResponseEntity.status(200).body(saldo);
+    }
+
+    @PatchMapping("{id}/depositar")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<BigDecimal> depositar(@PathVariable Long id, @RequestBody ContaCorrenteDTO dto) {
+        BigDecimal novoSaldo = contaCorrenteService.depositar(id, dto);
+        return ResponseEntity.status(200).body(novoSaldo);
+    }
+
+    @PostMapping("{id}/transferir")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Transacao> transferir(@PathVariable Long id, @RequestBody TransferenciasDTO dto) {
+        Transacao novoSaldo = contaCorrenteService.transferir(id, dto);
+        return ResponseEntity.status(200).body(novoSaldo);
     }
 }
 
