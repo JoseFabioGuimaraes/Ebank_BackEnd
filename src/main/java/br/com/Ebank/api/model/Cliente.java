@@ -1,27 +1,42 @@
 package br.com.Ebank.api.model;
 
+import jakarta.persistence.*;
+import lombok.*;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Entity
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.List;
+
 @Data
-@AllArgsConstructor
+@Entity
 @NoArgsConstructor
-public class User {
+@AllArgsConstructor
+public class Cliente{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+
+    private String nome;
+
+    @Column(unique = true)
+    private String cpf;
+
+    private String endereco;
+
+    private String telefone;
+
+    private LocalDate dataNascimento;
+
     private String email;
-    private Long cpf;
-    private String DataNascimento; // TODO: Mudar para LocalDate;
-    //TODO: Adicionar um tipo de status, para indicar se o usuário está ativo ou não.
+
+    private BigDecimal rendaMensal;
+
+    @Enumerated(EnumType.STRING)
+    private StatusCliente status = StatusCliente.ATIVO;
+
+    //@OneToMany(mappedBy = "cliente")
+   // private List<ContaCorrente> contasCorrentes;
 
 }

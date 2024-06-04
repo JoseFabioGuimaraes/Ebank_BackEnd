@@ -1,2 +1,6 @@
-package br.com.Ebank.api.model;public enum StatusCliente {
+package br.com.Ebank.api.model;
+
+public enum StatusCliente {
+    ATIVO,
+    INATIVO
 }

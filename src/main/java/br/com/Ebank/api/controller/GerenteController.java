@@ -1,2 +1,5 @@
-package br.com.Ebank.api.controller;public class GerenteController {
+package br.com.Ebank.api.controller;
+
+public class GerenteController {
+
 }
